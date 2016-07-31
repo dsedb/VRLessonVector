@@ -26,6 +26,19 @@ public class VectorManager : MonoBehaviour {
 	private Vector3 vector_a_;
 	private Vector3 vector_b_;
 
+	private bool display_add_ = false;
+	private bool display_sub_ = false;
+	private bool display_cross_ = false;
+
+	enum PadButton
+	{
+		None,
+		Left,
+		Right,
+		Up,
+		Down,
+	};
+
 	void Start()
 	{
 		hand_transform_a_ = hand_a_go.transform;
@@ -51,11 +64,54 @@ public class VectorManager : MonoBehaviour {
 		return value;
 	}
 
+	private PadButton get_button(SteamVR_Controller.DeviceRelation device_id)
+	{
+		PadButton value = PadButton.None;
+		var deviceIndex = SteamVR_Controller.GetDeviceIndex(device_id);
+		if (deviceIndex != -1) {
+			SteamVR_Controller.Device device = SteamVR_Controller.Input(deviceIndex);
+			bool pressed = device.GetPressDown(Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad);
+			if (pressed) {
+				var val = device.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad);
+				if (val.x + val.y < 0f) {
+					if (val.x - val.y < 0f) {
+						value = PadButton.Left;
+					} else {
+						value = PadButton.Down;
+					}
+				} else {
+					if (val.x - val.y < 0f) {
+						value = PadButton.Up;
+					} else {
+						value = PadButton.Right;
+					}
+				}
+			}
+		}
+		return value;
+	}
+
 	void Update ()
 	{
 		float right_value = get_value(SteamVR_Controller.DeviceRelation.Rightmost);
 		float left_value = get_value(SteamVR_Controller.DeviceRelation.Leftmost);
 		
+		switch (get_button(SteamVR_Controller.DeviceRelation.Rightmost)) {
+			case PadButton.None:
+				break;
+			case PadButton.Left:
+				display_cross_ = !display_cross_;
+				break;
+			case PadButton.Right:
+				display_sub_ = !display_sub_;
+				break;
+			case PadButton.Up:
+				break;
+			case PadButton.Down:
+				display_add_ = !display_add_;
+				break;
+		}
+
 		hand_line_a_.StartPos = hand_offset;
 		hand_line_a_.EndPos = new Vector3(0f, 0f, (1f + right_value)*0.5f);
 		hand_line_b_.StartPos = hand_offset;
@@ -66,6 +122,11 @@ public class VectorManager : MonoBehaviour {
 		vector_a_go.transform.rotation = hand_transform_a_.rotation;
 		vector_b_go.transform.position = center;
 		vector_b_go.transform.rotation = hand_transform_b_.rotation;
+
+		vector_add_go.SetActive(display_add_);
+		vector_sub_go.SetActive(display_sub_);
+		vector_cross_go.SetActive(display_cross_);
+
 		vector_add_go.transform.position = center;
 		vector_add_go.transform.rotation = Quaternion.identity;
 		vector_sub_go.transform.position = center;
