@@ -13,8 +13,20 @@ public class VolumetricLine
 	{
 		None,
 		NoneA,
-		EnemyBullet,
-		EnemyBulletA,
+		Red,
+		RedA,
+		Blue,
+		BlueA,
+		Mazenta,
+		MazentaA,
+		Green,
+		GreenA,
+		Yellow,
+		YellowA,
+		Cyan,
+		CyanA,
+		White,
+		WhiteA,
 	}
 
 	const int VOLUMETRICLINE_MAX = 256;
@@ -92,14 +104,38 @@ public class VolumetricLine
 #if UNITY_5_3
 		material_.SetColor("_Colors0", new Color(0f, 0f, 0f, 0f));
 		material_.SetColor("_Colors1", new Color(0f, 0f, 0f, 0f));
-		material_.SetColor("_Colors2", new Color(1f, 0.5f, 0.25f, 1f));
-		material_.SetColor("_Colors3", new Color(1f, 0.5f, 0.25f, 0f));
+		material_.SetColor("_Colors2", new Color(1f, 0f, 0f, 1f));
+		material_.SetColor("_Colors3", new Color(1f, 0f, 0f, 1f));
+		material_.SetColor("_Colors4", new Color(0f, 0f, 1f, 1f));
+		material_.SetColor("_Colors5", new Color(0f, 0f, 1f, 1f));
+		material_.SetColor("_Colors6", new Color(1f, 0f, 1f, 1f));
+		material_.SetColor("_Colors7", new Color(1f, 0f, 1f, 1f));
+		material_.SetColor("_Colors8", new Color(0f, 1f, 0f, 1f));
+		material_.SetColor("_Colors9", new Color(0f, 1f, 0f, 1f));
+		material_.SetColor("_Colors10", new Color(1f, 1f, 0f, 1f));
+		material_.SetColor("_Colors11", new Color(1f, 1f, 0f, 1f));
+		material_.SetColor("_Colors12", new Color(0f, 1f, 1f, 1f));
+		material_.SetColor("_Colors13", new Color(0f, 1f, 1f, 1f));
+		material_.SetColor("_Colors14", new Color(1f, 1f, 1f, 1f));
+		material_.SetColor("_Colors15", new Color(1f, 1f, 1f, 1f));
 #else
 		var col_list = new Vector4[] {
-			new Vector4(0f, 0f, 0f, 0f),
-			new Vector4(0f, 0f, 0f, 0f),
-			new Vector4(1f, 0.5f, 0.25f, 1f),
-			new Vector4(1f, 0.5f, 0.25f, 0f),
+			new Color(0f, 0f, 0f, 0f),
+			new Color(0f, 0f, 0f, 0f),
+			new Color(1f, 0f, 0f, 1f),
+			new Color(1f, 0f, 0f, 1f),
+			new Color(0f, 0f, 1f, 1f),
+			new Color(0f, 0f, 1f, 1f),
+			new Color(1f, 0f, 1f, 1f),
+			new Color(1f, 0f, 1f, 1f),
+			new Color(0f, 1f, 0f, 1f),
+			new Color(0f, 1f, 0f, 1f),
+			new Color(1f, 1f, 0f, 1f),
+			new Color(1f, 1f, 0f, 1f),
+			new Color(0f, 1f, 1f, 1f),
+			new Color(0f, 1f, 1f, 1f),
+			new Color(1f, 1f, 1f, 1f),
+			new Color(1f, 1f, 1f, 1f),
 		};
 		material_property_block_.SetVectorArray("_Colors", col_list);
 #endif
@@ -107,12 +143,10 @@ public class VolumetricLine
 
 	public void render(int front)
 	{
-		Debug.Log("bb");
 		mesh_.vertices = vertices_[front];
 		mesh_.normals = normals_[front];
 		mesh_.uv2 = uv2s_[front];
 		mesh_.RecalculateBounds(); // test
-		Debug.Log(mesh_);
 	}
 
 	public void begin(int front)

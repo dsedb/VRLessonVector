@@ -18,7 +18,7 @@
  			#include "UnityCG.cginc"
 
             uniform sampler2D _MainTex;
-			uniform fixed4 _Colors[4];
+			uniform fixed4 _Colors[16];
 
  			struct appdata_custom {
 				float4 vertex : POSITION;
