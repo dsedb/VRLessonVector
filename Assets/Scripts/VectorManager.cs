@@ -36,11 +36,11 @@ public class VectorManager : MonoBehaviour {
 		hand_transform_b_ = hand_b_go.transform;
 		hand_a_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.05f /* width */, UTJ.VolumetricLine.Type.Red);
 		hand_b_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.05f /* width */, UTJ.VolumetricLine.Type.Blue);
-		vector_a_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.05f /* width */, UTJ.VolumetricLine.Type.Red);
-		vector_b_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.05f /* width */, UTJ.VolumetricLine.Type.Blue);
-		vector_add_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.05f /* width */, UTJ.VolumetricLine.Type.Green);
-		vector_sub_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.05f /* width */, UTJ.VolumetricLine.Type.Green);
-		vector_cross_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.05f /* width */, UTJ.VolumetricLine.Type.Green);
+		vector_a_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.2f /* width */, UTJ.VolumetricLine.Type.Red);
+		vector_b_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.2f /* width */, UTJ.VolumetricLine.Type.Blue);
+		vector_add_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.2f /* width */, UTJ.VolumetricLine.Type.Green);
+		vector_sub_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.2f /* width */, UTJ.VolumetricLine.Type.Green);
+		vector_cross_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.2f /* width */, UTJ.VolumetricLine.Type.Green);
 	}
 
 	void OnDestroy()
@@ -135,8 +135,8 @@ public class VectorManager : MonoBehaviour {
 													 ref tail);
 		}
 		var center = new Vector3(0f, 1f, 2f);
-		var vector_a = hand_transform_a_.TransformVector(right_vector);
-		var vector_b = hand_transform_b_.TransformVector(left_vector);
+		var vector_a = hand_transform_a_.TransformVector(right_vector) * 4f;
+		var vector_b = hand_transform_b_.TransformVector(left_vector) * 4f;
 	    {
 			Vector3 head = vector_a + center;
 			Vector3 tail = center;
