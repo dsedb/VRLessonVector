@@ -43,8 +43,8 @@ public class VectorManager : MonoBehaviour {
 		vector_a_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.1f /* width */, UTJ.VolumetricLine.Type.Red);
 		vector_b_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.1f /* width */, UTJ.VolumetricLine.Type.Blue);
 		vector_add_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.1f /* width */, UTJ.VolumetricLine.Type.Green);
-		vector_sub_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.1f /* width */, UTJ.VolumetricLine.Type.Green);
-		vector_cross_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.1f /* width */, UTJ.VolumetricLine.Type.Green);
+		vector_sub_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.1f /* width */, UTJ.VolumetricLine.Type.Yellow);
+		vector_cross_line_id_ = UTJ.VolumetricLine.Instance.spawn(0.1f /* width */, UTJ.VolumetricLine.Type.Cyan);
 	}
 
 	void OnDestroy()
