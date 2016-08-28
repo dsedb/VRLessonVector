@@ -42,19 +42,19 @@ public class GameManager : MonoBehaviour {
 		float range = 0f;
 		switch (type) {
 			case VectorType.Add:
-				range = 4f;
+				range = 2f;
 				text_go_add_.SetActive(true);
 				text_go_sub_.SetActive(false);
 				text_go_cross_.SetActive(false);
 				break;
 			case VectorType.Sub:
-				range = 4f;
+				range = 2f;
 				text_go_add_.SetActive(false);
 				text_go_sub_.SetActive(true);
 				text_go_cross_.SetActive(false);
 				break;
 			case VectorType.Cross:
-				range = 4f;
+				range = 2f;
 				text_go_add_.SetActive(false);
 				text_go_sub_.SetActive(false);
 				text_go_cross_.SetActive(true);
